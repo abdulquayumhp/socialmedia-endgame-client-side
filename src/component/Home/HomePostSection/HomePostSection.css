@@ -1,0 +1,8 @@
+.homePostSection {
+  height: 800px;
+  background-color: #ffffff;
+  clip-path: polygon(0% 10%, 100% 0%, 100% 100%, 0% 100%);
+}
+.postBgImage {
+  background: url("https://static.vecteezy.com/system/resources/previews/001/072/376/original/network-connections-on-white-background-vector.jpg");
+}

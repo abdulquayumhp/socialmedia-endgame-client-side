@@ -1,0 +1,10 @@
+.homeBanner {
+  height: 800px;
+  background: url("https://static.vecteezy.com/system/resources/previews/001/072/376/original/network-connections-on-white-background-vector.jpg");
+  clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0% 100%);
+}
+.homeImage {
+  width: 900px;
+  height: 800px;
+  clip-path: polygon(5% 0%, 100% 0%, 100% 90%, 0% 100%);
+}
