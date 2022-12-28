@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
         path: "/postDetails/:id",
         element: <MediaDetals />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/postDetails/${params.id}`),
+          fetch(`${process.env.REACT_APP_URL}postDetails/${params.id}`),
       },
     ],
   },

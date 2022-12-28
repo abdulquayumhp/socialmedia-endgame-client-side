@@ -3,7 +3,7 @@ import React from "react";
 import MediaCard from "./MediaCard";
 
 const Media = () => {
-  const url = `http://localhost:5000/allPost`;
+  const url = `${process.env.REACT_APP_URL}allPost`;
 
   const { data: allPosts, refetch } = useQuery({
     queryKey: ["allPosts"],

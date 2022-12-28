@@ -1,12 +1,13 @@
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAOOC8P0CvQjhPlTNgEUV8dkb3EsHjtps8",
-  authDomain: "endgame-post-web.firebaseapp.com",
-  projectId: "endgame-post-web",
-  storageBucket: "endgame-post-web.appspot.com",
-  messagingSenderId: "1084361024336",
-  appId: "1:1084361024336:web:f81102054e7c504aac4255",
+  appId: process.env.REACT_APP_appId,
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId,
 };
 
 // Initialize Firebase

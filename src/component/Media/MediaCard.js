@@ -16,7 +16,7 @@ const MediaCard = ({ allPost, refetch }) => {
   const handleHeart = (id) => {
     setLoveCount(() => LoveCount + 1);
 
-    const url = `http://localhost:5000/updateLoveReaction?id=${id}`;
+    const url = `${process.env.REACT_APP_URL}updateLoveReaction?id=${id}`;
 
     fetch(url, {
       method: "PUT",
@@ -34,7 +34,7 @@ const MediaCard = ({ allPost, refetch }) => {
   const handleLike = (id) => {
     setLoveCount(() => LikeCount + 1);
 
-    const url = `http://localhost:5000/updateLikeReaction?id=${id}`;
+    const url = `${process.env.REACT_APP_URL}updateLikeReaction?id=${id}`;
 
     fetch(url, {
       method: "PUT",

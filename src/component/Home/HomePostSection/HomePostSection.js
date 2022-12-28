@@ -42,7 +42,7 @@ const HomePostSection = () => {
           postImage: image,
         };
 
-        const url = `http://localhost:5000/allPost`;
+        const url = `${process.env.REACT_APP_URL}allPost`;
 
         fetch(url, {
           method: "POST",

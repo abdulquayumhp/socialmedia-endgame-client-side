@@ -23,7 +23,7 @@ const AboutEdit = ({ postEditID, refetch }) => {
       postEditID,
     };
     console.log(data);
-    const url = `http://localhost:5000/EditAbout`;
+    const url = `${process.env.REACT_APP_URL}EditAbout`;
 
     fetch(url, {
       method: "PUT",

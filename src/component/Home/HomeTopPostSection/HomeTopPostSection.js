@@ -6,7 +6,7 @@ const HomeTopPostSection = () => {
   const { data, refetch } = useQuery({
     queryKey: ["popularPosts"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/popularPost`);
+      const res = await fetch(`${process.env.REACT_APP_URL}popularPost`);
       const data = await res.json();
       return data;
     },

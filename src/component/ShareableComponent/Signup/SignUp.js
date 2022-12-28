@@ -57,7 +57,7 @@ const SignUp = () => {
   };
 
   const handleAllUserDatabase = (e) => {
-    const url = `http://localhost:5000/allUserData`;
+    const url = `${process.env.REACT_APP_URL}allUserData`;
     fetch(url, {
       method: "POST",
       headers: {
