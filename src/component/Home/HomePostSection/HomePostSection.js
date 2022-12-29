@@ -6,10 +6,10 @@ import { ContextAuth } from "../../../AuthContext/AuthContext";
 import "../HomePostSection/HomePostSection.css";
 
 const HomePostSection = () => {
-  const { UserSignIn } = useContext(ContextAuth);
+  const { UserSignIn, user } = useContext(ContextAuth);
   const [firebaseError, setFirebaseError] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
-  const [user, setUser] = useState(null);
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const {
     register,
@@ -78,6 +78,7 @@ const HomePostSection = () => {
           <p className="font-semibold">Add text</p>
 
           <textarea
+            onKeyUp={(e) => setMessage(e.target.value)}
             id="w3review"
             name="name"
             rows="10"
@@ -97,7 +98,6 @@ const HomePostSection = () => {
             className="w-full md:w-[600px] border-amber-100 border px-4 py-3 rounded-sm bg-amber-200 text-black outline-none placeholder-black hover:bg-amber-300 cursor-pointer"
           >
             <input
-              onChange={imageChange}
               type="file"
               name="image"
               id="image"
@@ -111,12 +111,25 @@ const HomePostSection = () => {
             {errors.image && <p>{errors.image.message}</p>}
           </label>
         </div>
+        <div>
+          {user?.email ? (
+            ""
+          ) : (
+            <p className="py-1 text-sm">
+              if you are not login submit button will not be appear
+            </p>
+          )}
+        </div>
         <div className="space-y-1 text-sm mt-10 ">
-          <input
-            type="submit"
-            value="ADD YOUR POST"
-            className="w-full md:w-[600px] border-white border px-4 py-3 rounded-sm hover:bg-blue-200 bg-blue-300  outline-none placeholder-white text-black cursor-pointer"
-          />
+          {message && user?.email ? (
+            <input
+              type="submit"
+              value="ADD YOUR POST"
+              className="w-full md:w-[600px] border-white border px-4 py-3 rounded-sm hover:bg-blue-200 bg-blue-300  outline-none placeholder-white text-black cursor-pointer"
+            />
+          ) : (
+            ""
+          )}
         </div>
       </form>
     </div>

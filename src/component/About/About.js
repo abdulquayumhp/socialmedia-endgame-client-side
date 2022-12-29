@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { ContextAuth } from "../../AuthContext/AuthContext";
+import Loding from "../ShareableComponent/Loader/Loding";
 import AboutEdit from "./AboutEdit";
 
 const About = () => {
@@ -11,7 +12,7 @@ const About = () => {
   const {
     register,
     handleSubmit,
-    reset,
+
     formState: { errors },
   } = useForm();
 
@@ -19,6 +20,7 @@ const About = () => {
   const {
     data: postEdits,
     isLoading,
+    reset,
     refetch,
   } = useQuery({
     queryKey: ["postEdits", user?.email],
@@ -29,6 +31,9 @@ const About = () => {
     },
   });
   console.log(postEdits);
+  if (isLoading) {
+    return <Loding />;
+  }
   return (
     <>
       <div className="w-11/12 md:w-9/12  bg-white mx-auto rounded-lg flex justify-between flex-col  md:flex-row  mt-20 mb-5 py-10 ">
@@ -36,7 +41,7 @@ const About = () => {
           postEdits?.map((postEdit) => (
             <>
               <div className="py-5 pl-5 border border-black m-5 p-5">
-                <h1 className="text-xl md:text-2xl  font-semibold pb-2">
+                <h1 className="text-xl lg:text2xl md:text-1xl  font-semibold pb-2">
                   Name :
                   <span>
                     {postEdit?.UpdateName
@@ -44,7 +49,7 @@ const About = () => {
                       : user?.displayName}
                   </span>
                 </h1>
-                <h1 className="text-xl md:text-2xl  font-semibold pb-2">
+                <h1 className="text-xl lg:text2xl md:text-1xl  font-semibold pb-2">
                   Email :{" "}
                   <span>
                     {postEdit?.updateEmail
@@ -52,17 +57,21 @@ const About = () => {
                       : user?.email}
                   </span>
                 </h1>
-                <h1 className="text-xl md:text-2xl  font-semibold pb-2">
+                <h1 className="text-xl lg:text2xl md:text-1xl  font-semibold pb-2">
                   University :{" "}
                   <span>
                     {postEdit?.university ? postEdit?.university : "N/A"}
                   </span>
                 </h1>
-                <h1 className="text-xl md:text-2xl  font-semibold pb-2">
+                <h1 className="text-xl lg:text2xl md:text-1xl  font-semibold pb-2">
                   Address :{" "}
                   <span>{postEdit?.address ? postEdit?.address : "N/A"}</span>
                 </h1>
-                <AboutEdit refetch={refetch} postEditID={postEdit?._id} />
+                <AboutEdit
+                  refetch={refetch}
+                  reset={reset}
+                  postEditID={postEdit?._id}
+                />
               </div>
             </>
           ))}

@@ -3,7 +3,7 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { ContextAuth } from "../../AuthContext/AuthContext";
 
-const AboutEdit = ({ postEditID, refetch }) => {
+const AboutEdit = ({ postEditID, refetch, reset }) => {
   console.log(postEditID);
   const { user } = useContext(ContextAuth);
   const [firebaseError, setFirebaseError] = useState("");
@@ -36,6 +36,7 @@ const AboutEdit = ({ postEditID, refetch }) => {
         // console.log(update);
         toast.success("successfully your post added");
         refetch();
+        e.target.reset();
       })
       .catch((err) => console.log(err));
   };

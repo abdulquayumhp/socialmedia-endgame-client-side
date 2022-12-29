@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { FaHandPointRight, FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Loding from "../ShareableComponent/Loader/Loding";
 
-const MediaCard = ({ allPost, refetch }) => {
+const MediaCard = ({ allPost, refetch, isLoading }) => {
   const [like, setLike] = useState(0);
   console.log(typeof allPost.LoveCount, allPost.LoveCount);
   const [LoveCount, setLoveCount] = useState(
@@ -49,10 +50,12 @@ const MediaCard = ({ allPost, refetch }) => {
       })
       .catch((err) => console.log(err));
   };
-
+  if (isLoading) {
+    return <Loding />;
+  }
   return (
     <div className="py-5 ">
-      <div className="border border-1 h-[500px] w-full  rounded-lg mx-auto ">
+      <div className="border border-1 h-full w-full  rounded-lg mx-auto ">
         <img
           className=" w-full object-cover rounded-t-lg h-96"
           src={postImage}

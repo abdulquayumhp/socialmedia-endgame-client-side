@@ -5,6 +5,7 @@ import Media from "../../Media/Media";
 import MediaDetals from "../../Media/MediaDetals";
 import Message from "../../Message/Message";
 import Main from "../Main/Main";
+import PrivateRoute from "../ProvateRoute.js/PrivateRoute";
 import SignIn from "../SignIn/SignIn";
 import SignUp from "../Signup/SignUp";
 
@@ -39,7 +40,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/postDetails/:id",
-        element: <MediaDetals />,
+        element: (
+          <PrivateRoute>
+            <MediaDetals />
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`${process.env.REACT_APP_URL}postDetails/${params.id}`),
       },

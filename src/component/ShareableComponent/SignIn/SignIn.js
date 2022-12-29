@@ -1,12 +1,15 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ContextAuth } from "../../../AuthContext/AuthContext";
 
 const SignIn = () => {
-  const { UserSignIn } = useContext(ContextAuth);
+  const { UserSignIn, loading, setLoading } = useContext(ContextAuth);
   const [firebaseError, setFirebaseError] = useState("");
+
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const navigate = useNavigate();
 
   const {
@@ -18,13 +21,12 @@ const SignIn = () => {
   const handleSignIn = (e) => {
     setFirebaseError("");
 
-    console.log(e);
     UserSignIn(e.email, e.password)
       .then((update) => {
         const user = update.user;
         console.log(user);
         toast.success("Successfully login");
-        navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         setFirebaseError(err.message);

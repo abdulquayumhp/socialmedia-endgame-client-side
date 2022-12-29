@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import MediaCard from "../../Media/MediaCard";
+import Loding from "../../ShareableComponent/Loader/Loding";
 
 const HomeTopPostSection = () => {
-  const { data, refetch } = useQuery({
+  const { data, refetch, isLoading } = useQuery({
     queryKey: ["popularPosts"],
     queryFn: async () => {
       const res = await fetch(`${process.env.REACT_APP_URL}popularPost`);
@@ -12,6 +13,9 @@ const HomeTopPostSection = () => {
     },
   });
   console.log(data);
+  if (isLoading) {
+    return <Loding />;
+  }
 
   return (
     <div className=" w-11/12 lg:w-9/12  mx-auto rounded-lg mb-5 my-5 bg-white py-5">

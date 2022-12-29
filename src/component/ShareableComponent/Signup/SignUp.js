@@ -1,11 +1,14 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { ContextAuth } from "../../../AuthContext/AuthContext";
+import MiniLoding from "../Loader/MiniLoding";
 
 const SignUp = () => {
-  const { createUser, updateUserInfo, googleSignUp } = useContext(ContextAuth);
+  const { createUser, updateUserInfo, googleSignUp, loading, setLoading } =
+    useContext(ContextAuth);
 
   const navigate = useNavigate();
 
@@ -17,6 +20,8 @@ const SignUp = () => {
   } = useForm();
 
   const handleSignUp = (e) => {
+    setLoading(true);
+
     console.log(e);
     createUser(e.email, e.password).then((update) => {
       const user = update.user;
@@ -68,6 +73,8 @@ const SignUp = () => {
       .then((update) => {
         console.log(update);
         navigate("/signIn");
+        setLoading(false);
+        toast.success("successfully login");
       })
       .catch((err) => console.log(err));
   };
@@ -137,13 +144,19 @@ const SignUp = () => {
                     className="lg:w-96 md:w-48 border-amber-100 border w-full px-4 py-3 rounded-sm bg-amber-200 text-black outline-none placeholder-black"
                   />
                 </div>
-                <div className="space-y-1 text-sm mt-10 ">
-                  <input
-                    type="submit"
-                    value="SignUp"
-                    className="lg:w-96 md:w-48 border-amber-100 border w-full px-4 py-3 rounded-sm bg-amber-200 text-black outline-none placeholder-black cursor-pointer hover:bg-amber-400"
-                  />
-                </div>
+                {loading ? (
+                  <p className="lg:w-96 md:w-48 border-amber-100 border w-full px-4 py-3 rounded-sm bg-amber-200 text-black outline-none placeholder-black cursor-pointer hover:bg-amber-400">
+                    <MiniLoding />
+                  </p>
+                ) : (
+                  <div className="space-y-1 text-sm mt-10 ">
+                    <input
+                      type="submit"
+                      value="SignUp"
+                      className="lg:w-96 md:w-48 border-amber-100 border w-full px-4 py-3 rounded-sm bg-amber-200 text-black outline-none placeholder-black cursor-pointer hover:bg-amber-400"
+                    />
+                  </div>
+                )}
                 <div
                   onClick={handleGoogleLogin}
                   className="lg:w-96 md:w-48 border-amber-100 border w-full px-4 py-3 rounded-sm bg-amber-200 text-black outline-none placeholder-black cursor-pointer hover:bg-amber-400 mt-5 flex items-center justify-center"

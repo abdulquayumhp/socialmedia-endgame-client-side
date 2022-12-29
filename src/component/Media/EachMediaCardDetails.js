@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { FaHandPointRight, FaHeart } from "react-icons/fa";
+import CommentSection from "./CommentSection";
 
 const EachMediaCardDetails = ({ postImage }) => {
+  // console.log(postImage);
+
   const [LoveCount, setLoveCount] = useState(
     postImage?.LoveCount > 1 ? postImage?.LoveCount : 0 + 1
   );
@@ -45,33 +48,36 @@ const EachMediaCardDetails = ({ postImage }) => {
   };
 
   return (
-    <div className="border border-1 h-[600px] w-full  rounded-lg mx-auto  ">
-      <img
-        className=" w-full object-cover rounded-t-lg h-96"
-        src={postImage.postImage}
-        alt=""
-      />
-      <div className="pt-5 pl-5">
-        <h1>{postImage.message}</h1>
-        <div className="flex items-center justify-around py-4">
-          <div className="flex items-center ">
-            <FaHeart
-              className="cursor-pointer hover:text-red-500"
-              onClick={() => handleHeart(postImage._id)}
-            />
-            <p className="px-2">{postImage?.LoveCount}</p>
-          </div>
+    <>
+      <div className="border border-1  w-full  rounded-lg mx-auto  ">
+        <img
+          className=" w-full object-cover rounded-t-lg h-96"
+          src={postImage.postImage}
+          alt=""
+        />
+        <div className="pt-5 pl-5">
+          <h1>{postImage.message}</h1>
+          <div className="flex items-center justify-around py-4">
+            <div className="flex items-center ">
+              <FaHeart
+                className="cursor-pointer hover:text-red-500"
+                onClick={() => handleHeart(postImage._id)}
+              />
+              <p className="px-2">{postImage?.LoveCount}</p>
+            </div>
 
-          <div className="flex items-center ">
-            <p className="px-2">{postImage?.LikeCount}</p>
-            <FaHandPointRight
-              className="cursor-pointer hover:text-red-500"
-              onClick={() => handleLike(postImage._id)}
-            />
+            <div className="flex items-center ">
+              <p className="px-2">{postImage?.LikeCount}</p>
+              <FaHandPointRight
+                className="cursor-pointer hover:text-red-500"
+                onClick={() => handleLike(postImage._id)}
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <CommentSection postImage={postImage} />
+    </>
   );
 };
 
